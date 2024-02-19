@@ -1,0 +1,18 @@
+return {
+    require("plugins.coc"),
+    require("plugins.comment"),
+    require("plugins.dashboard"),
+    require("plugins.fugitive"),
+    require("plugins.indent-blank-line"),
+    require("plugins.lualine"),
+    require("plugins.markdown-preview"),
+    require("plugins.nvim-tree"),
+    require("plugins.surround"),
+    require("plugins.telescope"),
+    require("plugins.tmux"),
+    require("plugins.toggleterm"),
+    require("plugins.tokyonight"),
+    require("plugins.treesitter"),
+    require("plugins.undo-tree"),
+    require("plugins.yanky"),
+}
