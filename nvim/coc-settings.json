@@ -2,8 +2,9 @@
   "coc.preferences.enableMessageDialog": true,
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.formatOnSave": true,
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "colors.enable": true,
+  "highlight.colorNames.enable": false,
   "diagnostic.errorSign": " ",
   "diagnostic.hintSign": "󰠠 ",
   "diagnostic.infoSign": " ",
@@ -18,6 +19,7 @@
   "git.topRemovedSign.hlGroup": "GitSignsDelete",
   "hover.floatConfig": { "border": true, "rounded": true },
   "html.autoClosingTags": false,
+  "inlayHint.enable": false,
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",

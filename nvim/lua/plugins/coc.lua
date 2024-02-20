@@ -38,6 +38,7 @@ return {
                 inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : ""
             ]])
 
+        A.map("n", "<Leader>tc", ":CocCommand document.toggleColors<CR>")
         A.map("n", "<Leader>th", ":CocCommand document.toggleInlayHint<CR>")
         A.map("n", "<Leader>tl", ":CocCommand document.toggleCodeLens<CR>")
 
