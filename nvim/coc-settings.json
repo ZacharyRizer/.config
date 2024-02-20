@@ -19,7 +19,8 @@
   "git.topRemovedSign.hlGroup": "GitSignsDelete",
   "hover.floatConfig": { "border": true, "rounded": true },
   "html.autoClosingTags": false,
-  "inlayHint.enable": false,
+  "inlayHint.enable": true,
+  "inlayHint.display": false,
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
