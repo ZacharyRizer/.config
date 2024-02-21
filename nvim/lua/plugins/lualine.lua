@@ -10,8 +10,8 @@ return {
         require("lualine").setup({
             extensions = { "quickfix" },
             options = {
-                component_separators = '|',
-                section_separators = '',
+                component_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
                 disabled_filetypes = { "dashboard", "NvimTree", "undotree" }
             },
             sections = {
