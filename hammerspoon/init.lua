@@ -44,7 +44,7 @@ spoon.SpoonInstall:andUse("AppLauncher", {
     config = { modifiers = super },
     hotkeys = {
         q = "Finder",
-        w = "kitty",
+        w = "iTerm",
         e = "Brave Browser",
         a = "zoom.us",
         s = "IntelliJ IDEA Community Edition",
