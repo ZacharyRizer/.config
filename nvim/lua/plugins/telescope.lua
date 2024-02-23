@@ -1,11 +1,11 @@
 return {
     "nvim-telescope/telescope.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    keys = { "<Leader>c", "<Leader>f", "<Leader>g", "<Leader>h", "<Leader>m" },
+    keys = { "<Leader>c", "<Leader>f", "<Leader>g", "<Leader>H", "<Leader>m", },
     dependencies = {
-        { "nvim-lua/plenary.nvim" },
+         "nvim-lua/plenary.nvim" ,
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', enabled = vim.fn.executable("make") == 1 },
-        { "fannheyward/telescope-coc.nvim" }
+        "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
         local actions = require("telescope.actions")
@@ -39,9 +39,12 @@ return {
                 selection_caret = " ",
                 sorting_strategy = "ascending",
             },
+            extensions = {
+                ["ui-select"] = { require("telescope.themes").get_dropdown({}) }
+            }
         })
-        require("telescope").load_extension("coc")
         require('telescope').load_extension("fzf")
+        require("telescope").load_extension("ui-select")
         require("telescope").load_extension("yank_history")
 
         A.map("n", "<Leader>c", ":Telescope commands<CR>")
@@ -53,7 +56,7 @@ return {
             })
         end)
         A.map("n", "<Leader>g", ":Telescope live_grep<CR>")
-        A.map("n", "<Leader>G", ":Telescope search_history")
+        A.map("n", "<Leader>G", ":Telescope search_history<CR>")
         A.map("n", "<Leader>h", ":Telescope buffers<CR>")
         A.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
         A.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
