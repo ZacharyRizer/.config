@@ -12,6 +12,7 @@ return {
             options = {
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = '' },
+                disabled_filetypes = { statusline = { "dashboard" } },
                 refresh = {
                     statusline = 100,
                     tabline = 100,

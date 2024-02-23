@@ -3,9 +3,9 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     keys = { "<leader>d", "<leader>f", "<leader>g", "<leader>h" },
     dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-fzy-native.nvim",
-        "fannheyward/telescope-coc.nvim",
+        { "nvim-lua/plenary.nvim" },
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', enabled = vim.fn.executable("make") == 1 },
+        { "fannheyward/telescope-coc.nvim" }
     },
     config = function()
         local actions = require("telescope.actions")
@@ -41,7 +41,7 @@ return {
             },
         })
         require("telescope").load_extension("coc")
-        require("telescope").load_extension("fzy_native")
+        require('telescope').load_extension("fzf")
         require("telescope").load_extension("yank_history")
 
         A.map("n", "<Leader>b", ":Telescope buffers<CR>")
@@ -53,4 +53,5 @@ return {
         A.map("n", "<Leader>m", ":Telescope keymaps<CR>")
         A.map("n", "<Leader>y", ":Telescope yank_history<CR>")
     end,
+
 }
