@@ -10,6 +10,7 @@ return {
 			group = A.augroup("Lsp_Custom_Attach", { clear = true }),
 			callback = function(_, bufnr)
 				local opts = { buffer = bufnr }
+
 				A.map("n", "gr", ":Telescope lsp_references<CR>", opts)
 				A.map("n", "gd", ":Telescope lsp_definitions<CR>", opts)
 				A.map("n", "gi", ":Telescope lsp_implementations<CR>", opts)
@@ -21,8 +22,20 @@ return {
 				A.map("n", "[d", vim.diagnostic.goto_prev, opts)
 				A.map("n", "]d", vim.diagnostic.goto_next, opts)
 				A.map("n", "K", vim.lsp.buf.hover, opts)
+
+                local virtual_text_enabled = false
+                A.map('n', '<Leader>td', function()
+                    virtual_text_enabled = not virtual_text_enabled
+                    vim.diagnostic.config({
+                        virtual_text = virtual_text_enabled,
+                    })
+                end, opts)
+                A.map("n", "<Leader>th", function()
+                    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                end, opts)
 			end,
 		})
+
 
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
@@ -42,20 +55,19 @@ return {
 			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 		--------------- SERVER CONFIGURATIONS ---------------
-		-- lspconfig["cssls"].setup({ capabilities = capabilities })
-		-- lspconfig["html"].setup({ capabilities = capabilities })
-		-- lspconfig["hls"].setup({ capabilities = capabilities })
-		-- lspconfig["jsonls"].setup({ capabilities = capabilities })
+		lspconfig.cssls.setup({})
+		lspconfig.html.setup({})
+		lspconfig.hls.setup({})
+		lspconfig.jsonls.setup({})
 		lspconfig.lua_ls.setup({
-			settings = {
+            settings = {
 				Lua = {
-					diagnostics = { globals = { "vim" } },
+					diagnostics = { globals = {"hs", "vim" } },
 				},
 			},
-		})
-		-- lspconfig["pyright"].setup({ capabilities = capabilities })
-		-- lspconfig["rust_analyzer"].setup({ capabilities = capabilities })
-		-- lspconfig["taplo"].setup({ capabilities = capabilities })
+        })
+		lspconfig.pyright.setup({})
+		lspconfig.rust_analyzer.setup({})
 		lspconfig.tsserver.setup({})
 	end,
 }
