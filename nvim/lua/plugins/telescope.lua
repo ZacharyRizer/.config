@@ -1,7 +1,7 @@
 return {
     "nvim-telescope/telescope.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    keys = { "<leader>d", "<leader>f", "<leader>g", "<leader>h" },
+    keys = { "<Leader>c", "<Leader>f", "<Leader>g", "<Leader>h", "<Leader>m" },
     dependencies = {
         { "nvim-lua/plenary.nvim" },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', enabled = vim.fn.executable("make") == 1 },
@@ -44,14 +44,22 @@ return {
         require('telescope').load_extension("fzf")
         require("telescope").load_extension("yank_history")
 
-        A.map("n", "<Leader>b", ":Telescope buffers<CR>")
         A.map("n", "<Leader>c", ":Telescope commands<CR>")
-        A.map("n", "<Leader>d", ":Telescope help_tags prompt_title=Documentation<CR>")
+        A.map("n", "<Leader>C", ":Telescope command_history<CR>")
         A.map("n", "<Leader>f", ":Telescope find_files<CR>")
+        A.map('n', '<Leader>F', function()
+            require('telescope.builtin').find_files({
+                cwd = vim.fn.input('Find Files: ', vim.fn.getcwd(), 'dir')
+            })
+        end)
         A.map("n", "<Leader>g", ":Telescope live_grep<CR>")
-        A.map("n", "<Leader>h", ":Telescope oldfiles prompt_title=History<CR>")
-        A.map("n", "<Leader>m", ":Telescope keymaps<CR>")
+        A.map("n", "<Leader>G", ":Telescope search_history")
+        A.map("n", "<Leader>h", ":Telescope buffers<CR>")
+        A.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
+        A.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
+        A.map("n", "<Leader>M", ":Telescope keymaps<CR>")
         A.map("n", "<Leader>y", ":Telescope yank_history<CR>")
+        A.map("n", "<Leader>Y", ":Telescope registers<CR>")
     end,
 
 }

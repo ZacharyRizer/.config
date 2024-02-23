@@ -52,7 +52,7 @@ return {
 
         A.map("n", "<Leader>la", ":Telescope coc file_code_actions<CR>")
         A.map("n", "<Leader>ld", ":Telescope coc diagnostics<CR>")
-        A.map("n", "<Leader>ls", ":Telescope treesitter<CR>")
+        A.map("n", "<Leader>ls", ":Telescope coc document_symbols<CR>")
 
         A.map("n", "[d", "<Plug>(coc-diagnostic-prev)")
         A.map("n", "]d", "<Plug>(coc-diagnostic-next)")

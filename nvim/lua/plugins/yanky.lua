@@ -6,7 +6,7 @@ return {
         A.map({ "n", "x" }, "y", "<Plug>(YankyYank)")
         A.map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
         A.map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-        A.map("n", "<C-n>", "<Plug>(YankyNextEntry)")
-        A.map("n", "<C-p>", "<Plug>(YankyPreviousEntry)")
+        A.map("n", "]y", "<Plug>(YankyNextEntry)")
+        A.map("n", "[y", "<Plug>(YankyPreviousEntry)")
     end,
 }
