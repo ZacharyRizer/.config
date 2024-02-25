@@ -15,6 +15,7 @@ return {
 			},
 		})
 		require("mason-lspconfig").setup({
+			automatic_installation = true,
 			ensure_installed = {
 				"cssls",
 				"html",
@@ -25,7 +26,6 @@ return {
 				"rust_analyzer",
 				"tsserver",
 			},
-			automatic_installation = true,
 		})
 	end,
 }
