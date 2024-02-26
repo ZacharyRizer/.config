@@ -11,6 +11,7 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		local ls = require("luasnip")
 
 		local has_words_before = function()
 			unpack = unpack or table.unpack
@@ -59,5 +60,12 @@ return {
 			},
 		})
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+		A.map({ "i", "s" }, "<C-L>", function()
+			ls.jump(1)
+		end)
+		A.map({ "i", "s" }, "<C-h>", function()
+			ls.jump(-1)
+		end)
 	end,
 }
