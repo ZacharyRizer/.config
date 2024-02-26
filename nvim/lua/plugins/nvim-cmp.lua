@@ -11,10 +11,18 @@ return {
 	},
 	config = function()
 		local cmp = require("cmp")
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		local luasnip = require("luasnip")
 
-        require("luasnip.loaders.from_vscode").lazy_load()
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+		local luasnip = require("luasnip")
+		A.map({ "i", "s" }, "<C-L>", function()
+			luasnip.jump(1)
+		end)
+		A.map({ "i", "s" }, "<C-h>", function()
+			luasnip.jump(-1)
+		end)
+		require("luasnip.loaders.from_vscode").lazy_load()
 
 		local has_words_before = function()
 			unpack = unpack or table.unpack
@@ -31,14 +39,11 @@ return {
 			mapping = cmp.mapping.preset.insert({
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
-				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
 					elseif has_words_before() then
 						cmp.complete()
 					else
@@ -48,8 +53,6 @@ return {
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
 					else
 						fallback()
 					end
@@ -68,7 +71,5 @@ return {
 				scrolbar = true,
 			},
 		})
-
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }
