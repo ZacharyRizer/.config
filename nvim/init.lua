@@ -1,10 +1,10 @@
 ---------------------------------- Aliases ------------------------------------
 
-A = {}
-A.augroup = vim.api.nvim_create_augroup
-A.autocmd = vim.api.nvim_create_autocmd
-A.del = vim.keymap.del
-A.map = vim.keymap.set
+V = {}
+V.augroup = vim.api.nvim_create_augroup
+V.autocmd = vim.api.nvim_create_autocmd
+V.del = vim.keymap.del
+V.map = vim.keymap.set
 
 --------------------------------- Core Setup -----------------------------------
 

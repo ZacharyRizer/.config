@@ -62,10 +62,10 @@ return {
 		})
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-		A.map({ "i", "s" }, "<C-L>", function()
+		V.map({ "i", "s" }, "<C-L>", function()
 			ls.jump(1)
 		end)
-		A.map({ "i", "s" }, "<C-h>", function()
+		V.map({ "i", "s" }, "<C-h>", function()
 			ls.jump(-1)
 		end)
 	end,

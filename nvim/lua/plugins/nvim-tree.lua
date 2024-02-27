@@ -3,7 +3,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = { "<C-e>" },
 	config = function()
-		A.map("n", "<C-e>", ":NvimTreeToggle<CR>")
+		V.map("n", "<C-e>", ":NvimTreeToggle<CR>")
 
 		local function nvim_tree_on_attach(bufnr)
 			local api = require("nvim-tree.api")
@@ -14,14 +14,14 @@ return {
 
 			api.config.mappings.default_on_attach(bufnr)
 
-			A.map("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
-			A.map("n", "l", api.node.open.replace_tree_buffer, opts("Open: In Place"))
-			A.map("n", "<BS>", api.tree.change_root_to_parent, opts("Up"))
-			A.map("n", "<C-s>", api.node.open.horizontal, opts("Open: Horizontal Split"))
-			A.map("n", "?", api.tree.toggle_help, opts("Help"))
+			V.map("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
+			V.map("n", "l", api.node.open.replace_tree_buffer, opts("Open: In Place"))
+			V.map("n", "<BS>", api.tree.change_root_to_parent, opts("Up"))
+			V.map("n", "<C-s>", api.node.open.horizontal, opts("Open: Horizontal Split"))
+			V.map("n", "?", api.tree.toggle_help, opts("Help"))
 
-			A.del("n", "<C-e>", { buffer = bufnr })
-			A.del("n", "<C-x>", { buffer = bufnr })
+			V.del("n", "<C-e>", { buffer = bufnr })
+			V.del("n", "<C-x>", { buffer = bufnr })
 		end
 
 		require("nvim-tree").setup({

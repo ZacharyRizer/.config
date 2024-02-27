@@ -20,7 +20,7 @@ return {
 				typescriptreact = { "prettierd", "prettier" },
 			},
 		})
-		A.map({ "n", "v" }, "<Leader><CR>", function()
+		V.map({ "n", "v" }, "<Leader><CR>", function()
 			conform.format({
 				lsp_fallback = true,
 				timeout_ms = 1000,

@@ -6,7 +6,7 @@ return {
             on_attach = function()
                 local gs = package.loaded.gitsigns
 
-                A.map("n", "]c", function()
+                V.map("n", "]c", function()
                     if vim.wo.diff then
                         return "]c"
                     end
@@ -16,7 +16,7 @@ return {
                     return "<Ignore>"
                 end, { expr = true })
 
-                A.map("n", "[c", function()
+                V.map("n", "[c", function()
                     if vim.wo.diff then
                         return "[c"
                     end
@@ -26,8 +26,8 @@ return {
                     return "<Ignore>"
                 end, { expr = true })
 
-                A.map("n", "gc", gs.preview_hunk)
-                A.map("n", "gb", function()
+                V.map("n", "gc", gs.preview_hunk)
+                V.map("n", "gb", function()
                     gs.blame_line({ full = true })
                 end)
             end,

@@ -35,40 +35,40 @@ vim.opt.wildmode = "longest:full,full"
 vim.opt.wrap = false
 vim.opt.writebackup = false
 
-local proton_pack = A.augroup("Proton_Pack", { clear = true })
+local proton_pack = V.augroup("Proton_Pack", { clear = true })
 -- turn off automatic comment formatting
-A.autocmd("BufEnter", {
+V.autocmd("BufEnter", {
     pattern = "*",
     command = "setlocal fo-=c fo-=r fo-=o",
     group = proton_pack,
 })
 -- check for file changes
-A.autocmd({ "BufEnter", "FocusGained" }, {
+V.autocmd({ "BufEnter", "FocusGained" }, {
     pattern = "*",
     command = "checktime",
     group = proton_pack,
 })
 -- remove trailing white space on save
-A.autocmd("BufWritePre", {
+V.autocmd("BufWritePre", {
     pattern = "*",
     command = "%s/\\s\\+$//e",
     group = proton_pack,
 })
 -- use 4 space tabs for specific languages
-A.autocmd("FileType", {
+V.autocmd("FileType", {
     pattern = { "go", "haskell", "lua", "python", "yaml" },
     command = "setlocal shiftwidth=4 softtabstop=4 tabstop=4",
     group = proton_pack,
 })
 -- make windows equal sizes when opening/closing
-A.autocmd("VimResized", {
+V.autocmd("VimResized", {
     pattern = "*",
     command = ":wincmd =",
     group = proton_pack,
 })
 -- cursorline is only active in current buffer
 local set_cursorline = function(event, value, pattern)
-    A.autocmd(event, {
+    V.autocmd(event, {
         group = proton_pack,
         pattern = pattern,
         callback = function()
