@@ -15,7 +15,7 @@ return {
 			float = { border = "rounded" },
 			severity_sort = true,
 			update_in_insert = true,
-			virtual_text = false,
+			virtual_text = true,
 		})
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 		vim.lsp.handlers["textDocument/signatureHelp"] =
@@ -37,7 +37,7 @@ return {
 			V.map("n", "]d", vim.diagnostic.goto_next, opts)
 			V.map("n", "K", vim.lsp.buf.hover, opts)
 
-			local virtual_text_enabled = false
+			local virtual_text_enabled = true
 			V.map("n", "<Leader>td", function()
 				virtual_text_enabled = not virtual_text_enabled
 				vim.diagnostic.config({
