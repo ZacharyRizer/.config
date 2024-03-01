@@ -29,12 +29,13 @@ return {
 			V.map("n", "gd", ":Telescope lsp_definitions<CR>", opts)
 			V.map("n", "gi", ":Telescope lsp_implementations<CR>", opts)
 			V.map("n", "gt", ":Telescope lsp_type_definitions<CR>", opts)
-			V.map("n", "<Leader>a", vim.lsp.buf.code_action, opts)
-			V.map("n", "<Leader>d", ":Telescope diagnostics bufnr=0<CR>", opts)
-			V.map("n", "<Leader>s", ":Telescope lsp_document_symbols<CR>", opts)
+			V.map("n", "<Leader>la", vim.lsp.buf.code_action, opts)
+			V.map("n", "<Leader>ld", ":Telescope diagnostics bufnr=0<CR>", opts)
+			V.map("n", "<Leader>ls", ":Telescope lsp_document_symbols<CR>", opts)
 			V.map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
 			V.map("n", "[d", vim.diagnostic.goto_prev, opts)
 			V.map("n", "]d", vim.diagnostic.goto_next, opts)
+			V.map("n", "<Leader>d", vim.diagnostic.open_float, opts)
 			V.map("n", "K", vim.lsp.buf.hover, opts)
 
 			local virtual_text_enabled = true

@@ -3,6 +3,7 @@ return {
 	event = { "InsertEnter" },
 	dependencies = {
 		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 		"L3MON4D3/LuaSnip",
@@ -24,7 +25,7 @@ return {
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = false}),
+				["<CR>"] = cmp.mapping.confirm({ select = false }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -42,7 +43,7 @@ return {
 					end
 				end, { "i", "s" }),
 			}),
-            preselect = cmp.PreselectMode.None,
+			preselect = cmp.PreselectMode.None,
 			snippet = {
 				expand = function(args)
 					require("luasnip").lsp_expand(args.body)
@@ -58,6 +59,28 @@ return {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 				scrolbar = true,
+			},
+		})
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline({
+				["<C-p>"] = function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					else
+                        fallback()
+					end
+				end,
+				["<C-n>"] = function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					else
+                        fallback()
+					end
+				end,
+			}),
+			sources = {
+				{ name = "path" },
+				{ name = "cmdline" },
 			},
 		})
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

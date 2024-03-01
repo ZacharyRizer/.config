@@ -48,7 +48,6 @@ return {
         require("telescope").load_extension("yank_history")
 
         V.map("n", "<Leader>c", ":Telescope commands<CR>")
-        V.map("n", "<Leader>C", ":Telescope command_history<CR>")
         V.map("n", "<Leader>f", ":Telescope find_files<CR>")
         V.map('n', '<Leader>F', function()
             require('telescope.builtin').find_files({
@@ -56,13 +55,10 @@ return {
             })
         end)
         V.map("n", "<Leader>g", ":Telescope live_grep<CR>")
-        V.map("n", "<Leader>G", ":Telescope search_history<CR>")
         V.map("n", "<Leader>h", ":Telescope buffers<CR>")
         V.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
         V.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
-        V.map("n", "<Leader>M", ":Telescope keymaps<CR>")
         V.map("n", "<Leader>y", ":Telescope yank_history<CR>")
-        V.map("n", "<Leader>Y", ":Telescope registers<CR>")
     end,
 
 }
