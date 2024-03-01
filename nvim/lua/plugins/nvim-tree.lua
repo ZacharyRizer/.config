@@ -32,7 +32,7 @@ return {
 			V.map("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
 			V.map("n", "l", custom_open_dir, opts("Open Directory"))
 			V.map("n", "H", api.tree.change_root_to_parent, opts("Up a Directory"))
-			V.map("n", "L", api.tree.change_root_to_node, opts("CD"))
+			V.map("n", "L", api.tree.change_root_to_node, opts("CD into Directory"))
 			V.map("n", "<C-s>", api.node.open.horizontal, opts("Open: Horizontal Split"))
 			V.map("n", "<C-v>", api.node.open.vertical, opts("Open: Vertical Split"))
 			V.map("n", "gi", api.tree.toggle_gitignore_filter, opts("Toggle Ignored Files"))
