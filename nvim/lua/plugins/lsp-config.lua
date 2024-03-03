@@ -1,7 +1,11 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "hrsh7th/cmp-nvim-lsp" },
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"hrsh7th/cmp-nvim-lsp",
+		{ "j-hui/fidget.nvim", opts = {} },
+	},
 	config = function()
 		----> LSP-UI SETTINGS
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
@@ -54,32 +58,44 @@ return {
 		})
 
 		----> SERVER CONFIGURATIONS
-		local lspconfig = require("lspconfig")
+		local servers = {
+			cssls = {},
+			html = {},
+			hls = {
+				settings = {
+					haskell = {
+						formattingProvider = "fourmolu",
+					},
+				},
+			},
+			jsonls = {},
+			lua_ls = {
+				settings = {
+					Lua = {
+						diagnostics = { globals = { "hs", "vim" } },
+					},
+				},
+			},
+			pyright = {},
+			rust_analyzer = {},
+			taplo = {},
+			tsserver = {},
+		}
+		local ensure_installed = vim.tbl_keys(servers or {})
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-		lspconfig.cssls.setup({ capabilities = capabilities })
-		lspconfig.html.setup({ capabilities = capabilities })
-		lspconfig.hls.setup({
-			capabilities = capabilities,
-			settings = {
-				haskell = {
-					formattingProvider = "fourmolu",
-				},
+		require("mason").setup({ ui = { border = "rounded" } })
+		require("mason-lspconfig").setup({
+			automatic_installation = true,
+			ensure_installed = ensure_installed,
+			handlers = {
+				function(server_name)
+					local server = servers[server_name] or {}
+					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+					require("lspconfig")[server_name].setup(server)
+				end,
 			},
 		})
-		lspconfig.jsonls.setup({ capabilities = capabilities })
-		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					diagnostics = { globals = { "hs", "vim" } },
-				},
-			},
-		})
-		lspconfig.pyright.setup({ capabilities = capabilities })
-		lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-		lspconfig.taplo.setup({ capabilities = capabilities })
-		lspconfig.tsserver.setup({ capabilities = capabilities })
 	end,
 }
