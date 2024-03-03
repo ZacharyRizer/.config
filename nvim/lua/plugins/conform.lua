@@ -20,12 +20,10 @@ return {
 				typescript = { "prettierd", "prettier" },
 				typescriptreact = { "prettierd", "prettier" },
 			},
-		})
-		V.map({ "n", "v" }, "<Leader><CR>", function()
-			conform.format({
+			format_on_save = {
+				timeout_ms = 500,
 				lsp_fallback = true,
-				timeout_ms = 1000,
-			})
-		end)
+			},
+		})
 	end,
 }

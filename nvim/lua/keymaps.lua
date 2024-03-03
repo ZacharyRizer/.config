@@ -1,8 +1,6 @@
 vim.g.mapleader = " "
 V.map("i", "<C-c>", "<ESC>")
 V.map("n", "<C-c>", ":nohl<CR>")
-V.map("n", "<Leader>w", ":wa<CR>")
-V.map("n", "<Leader>q", ":qa<CR>")
 
 ---- terminal buffer mappings
 V.map("t", "<Leader><ESC>", "<C-\\><C-n>")

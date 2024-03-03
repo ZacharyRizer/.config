@@ -42,6 +42,16 @@ return {
 						fallback()
 					end
 				end, { "i", "s" }),
+				["<C-l>"] = cmp.mapping(function()
+					if ls.expand_or_locally_jumpable() then
+						ls.expand_or_jump()
+					end
+				end, { "i", "s" }),
+				["<C-h>"] = cmp.mapping(function()
+					if ls.locally_jumpable(-1) then
+						ls.jump(-1)
+					end
+				end, { "i", "s" }),
 			}),
 			preselect = cmp.PreselectMode.None,
 			snippet = {
@@ -61,35 +71,30 @@ return {
 				scrolbar = true,
 			},
 		})
+
 		cmp.setup.cmdline(":", {
 			mapping = cmp.mapping.preset.cmdline({
 				["<C-p>"] = function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
 					else
-                        fallback()
+						fallback()
 					end
 				end,
 				["<C-n>"] = function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
 					else
-                        fallback()
+						fallback()
 					end
 				end,
 			}),
 			sources = {
+				{ name = "cmdline", keyword_length = 2 },
 				{ name = "path" },
-				{ name = "cmdline" },
 			},
 		})
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-		V.map({ "i", "s" }, "<C-L>", function()
-			ls.jump(1)
-		end)
-		V.map({ "i", "s" }, "<C-h>", function()
-			ls.jump(-1)
-		end)
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }

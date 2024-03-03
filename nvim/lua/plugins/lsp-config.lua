@@ -22,62 +22,64 @@ return {
 			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 		----> LSP KEYMAPS
-		local on_attach = function(_, bufnr)
-			local opts = { buffer = bufnr }
+		V.autocmd("LspAttach", {
+			group = V.augroup("kickstart-lsp-attach", { clear = true }),
+			callback = function(event)
+				local opts = { buffer = event.buf }
 
-			V.map("n", "gr", ":Telescope lsp_references<CR>", opts)
-			V.map("n", "gd", ":Telescope lsp_definitions<CR>", opts)
-			V.map("n", "gi", ":Telescope lsp_implementations<CR>", opts)
-			V.map("n", "gt", ":Telescope lsp_type_definitions<CR>", opts)
-			V.map("n", "<Leader>la", vim.lsp.buf.code_action, opts)
-			V.map("n", "<Leader>ld", ":Telescope diagnostics bufnr=0<CR>", opts)
-			V.map("n", "<Leader>ls", ":Telescope lsp_document_symbols<CR>", opts)
-			V.map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
-			V.map("n", "[d", vim.diagnostic.goto_prev, opts)
-			V.map("n", "]d", vim.diagnostic.goto_next, opts)
-			V.map("n", "<Leader>d", vim.diagnostic.open_float, opts)
-			V.map("n", "K", vim.lsp.buf.hover, opts)
+				V.map("n", "gr", ":Telescope lsp_references<CR>", opts)
+				V.map("n", "gd", ":Telescope lsp_definitions<CR>", opts)
+				V.map("n", "gi", ":Telescope lsp_implementations<CR>", opts)
+				V.map("n", "gt", ":Telescope lsp_type_definitions<CR>", opts)
+				V.map("n", "<Leader>la", vim.lsp.buf.code_action, opts)
+				V.map("n", "<Leader>ld", ":Telescope diagnostics bufnr=0<CR>", opts)
+				V.map("n", "<Leader>ls", ":Telescope lsp_document_symbols<CR>", opts)
+				V.map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
+				V.map("n", "[d", vim.diagnostic.goto_prev, opts)
+				V.map("n", "]d", vim.diagnostic.goto_next, opts)
+				V.map("n", "<Leader>d", vim.diagnostic.open_float, opts)
+				V.map("n", "K", vim.lsp.buf.hover, opts)
 
-			local virtual_text_enabled = true
-			V.map("n", "<Leader>td", function()
-				virtual_text_enabled = not virtual_text_enabled
-				vim.diagnostic.config({
-					virtual_text = virtual_text_enabled,
-				})
-			end, opts)
-			V.map("n", "<Leader>th", function()
-				vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-			end, opts)
-		end
+				local virtual_text_enabled = true
+				V.map("n", "<Leader>td", function()
+					virtual_text_enabled = not virtual_text_enabled
+					vim.diagnostic.config({
+						virtual_text = virtual_text_enabled,
+					})
+				end, opts)
+				V.map("n", "<Leader>th", function()
+					vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+				end, opts)
+			end,
+		})
 
 		----> SERVER CONFIGURATIONS
 		local lspconfig = require("lspconfig")
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-		lspconfig.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.cssls.setup({ capabilities = capabilities })
+		lspconfig.html.setup({ capabilities = capabilities })
 		lspconfig.hls.setup({
 			capabilities = capabilities,
-			on_attach = on_attach,
 			settings = {
 				haskell = {
 					formattingProvider = "fourmolu",
 				},
 			},
 		})
-		lspconfig.jsonls.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.jsonls.setup({ capabilities = capabilities })
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
-			on_attach = on_attach,
 			settings = {
 				Lua = {
 					diagnostics = { globals = { "hs", "vim" } },
 				},
 			},
 		})
-		lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.rust_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.pyright.setup({ capabilities = capabilities })
+		lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+		lspconfig.taplo.setup({ capabilities = capabilities })
+		lspconfig.tsserver.setup({ capabilities = capabilities })
 	end,
 }
