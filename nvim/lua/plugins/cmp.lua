@@ -8,6 +8,7 @@ return {
 		"hrsh7th/cmp-path",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
+		{ "windwp/nvim-autopairs", opts = { fast_wrap = {} } },
 	},
 	config = function()
 		local cmp = require("cmp")
