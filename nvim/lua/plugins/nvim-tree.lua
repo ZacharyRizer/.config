@@ -43,6 +43,16 @@ return {
 			actions = {
 				open_file = { quit_on_open = true },
 			},
+			diagnostics = {
+				enable = true,
+				icons = {
+					hint = "󰠠",
+					info = "",
+					warning = "",
+					error = "",
+				},
+				show_on_dirs = true,
+			},
 			renderer = {
 				indent_markers = { enable = true },
 			},
