@@ -11,6 +11,7 @@ return {
 			},
 		},
 	},
+	event = { "BufReadPre", "BufNewFile", "VeryLazy" },
 	config = function()
 		----> LSP-UI SETTINGS
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }

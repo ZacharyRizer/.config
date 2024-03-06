@@ -1,7 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPre", "BufNewFile", "VeryLazy" },
 	config = function()
 		local big_screen = function()
 			return vim.fn.winwidth(0) > 90
@@ -26,7 +26,7 @@ return {
 			options = {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
-				disabled_filetypes = { statusline = { "dashboard" } },
+				disabled_filetypes = { statusline = { "dashboard" }, winbar = { "dashboard" } },
 				refresh = {
 					statusline = 100,
 					tabline = 100,

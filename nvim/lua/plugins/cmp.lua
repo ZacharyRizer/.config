@@ -1,6 +1,5 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = { "InsertEnter" },
 	dependencies = {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-cmdline",
@@ -10,6 +9,7 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		{ "windwp/nvim-autopairs", opts = { fast_wrap = {} } },
 	},
+	event = "VeryLazy",
 	config = function()
 		local cmp = require("cmp")
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")

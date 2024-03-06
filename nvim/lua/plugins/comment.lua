@@ -1,6 +1,6 @@
 return {
 	"numToStr/Comment.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	config = function()
 		require("Comment").setup({
 			toggler = { line = "<Leader>`", block = "<Leader>~" },

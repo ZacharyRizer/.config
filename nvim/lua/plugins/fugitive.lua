@@ -1,5 +1,6 @@
 return {
 	"tpope/vim-fugitive",
+	event = "VeryLazy",
 	config = function()
 		vim.api.nvim_create_user_command("Diff", function(input)
 			local branch = input.args ~= "" and input.args or "main"

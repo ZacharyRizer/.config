@@ -1,7 +1,5 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	keys = { "<Leader>c", "<Leader>f", "<Leader>g", "<Leader>h", "<Leader>m" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{
@@ -13,6 +11,7 @@ return {
 		},
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
+	event = "VeryLazy",
 	config = function()
 		local actions = require("telescope.actions")
 		require("telescope").setup({

@@ -1,7 +1,7 @@
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
-	keys = { "<C-t>" },
+	event = "VeryLazy",
 	config = function()
 		require("toggleterm").setup({
 			direction = "float",

@@ -1,5 +1,8 @@
 vim.loader.enable()
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -38,43 +41,43 @@ vim.opt.writebackup = false
 local proton_pack = V.augroup("Proton_Pack", { clear = true })
 -- turn off automatic comment formatting
 V.autocmd("BufEnter", {
-    pattern = "*",
-    command = "setlocal fo-=c fo-=r fo-=o",
-    group = proton_pack,
+	pattern = "*",
+	command = "setlocal fo-=c fo-=r fo-=o",
+	group = proton_pack,
 })
 -- check for file changes
 V.autocmd({ "BufEnter", "FocusGained" }, {
-    pattern = "*",
-    command = "checktime",
-    group = proton_pack,
+	pattern = "*",
+	command = "checktime",
+	group = proton_pack,
 })
 -- remove trailing white space on save
 V.autocmd("BufWritePre", {
-    pattern = "*",
-    command = "%s/\\s\\+$//e",
-    group = proton_pack,
+	pattern = "*",
+	command = "%s/\\s\\+$//e",
+	group = proton_pack,
 })
 -- use 4 space tabs for specific languages
 V.autocmd("FileType", {
-    pattern = { "go", "haskell", "lua", "python", "yaml" },
-    command = "setlocal shiftwidth=4 softtabstop=4 tabstop=4",
-    group = proton_pack,
+	pattern = { "go", "haskell", "lua", "python", "yaml" },
+	command = "setlocal shiftwidth=4 softtabstop=4 tabstop=4",
+	group = proton_pack,
 })
 -- make windows equal sizes when opening/closing
 V.autocmd("VimResized", {
-    pattern = "*",
-    command = ":wincmd =",
-    group = proton_pack,
+	pattern = "*",
+	command = ":wincmd =",
+	group = proton_pack,
 })
 -- cursorline is only active in current buffer
 local set_cursorline = function(event, value, pattern)
-    V.autocmd(event, {
-        group = proton_pack,
-        pattern = pattern,
-        callback = function()
-            vim.opt_local.cursorline = value
-        end,
-    })
+	V.autocmd(event, {
+		group = proton_pack,
+		pattern = pattern,
+		callback = function()
+			vim.opt_local.cursorline = value
+		end,
+	})
 end
 set_cursorline("WinLeave", false)
 set_cursorline("WinEnter", true)

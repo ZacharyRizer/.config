@@ -1,6 +1,6 @@
 return {
 	"nvim-pack/nvim-spectre",
-	keys = { "<Leader>s" },
+	event = "VeryLazy",
 	config = function()
 		require("spectre").setup({
 			is_insert_mode = true,
