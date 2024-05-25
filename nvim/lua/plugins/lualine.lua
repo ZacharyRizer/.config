@@ -8,7 +8,7 @@ return {
 		end
 
 		local lsp_status = function()
-			local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+			local clients = vim.lsp.get_clients({ bufnr = 0 })
 			if next(clients) == nil then
 				return "No LSP Connected"
 			end

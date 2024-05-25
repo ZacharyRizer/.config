@@ -60,7 +60,7 @@ return {
 			on_attach = nvim_tree_on_attach,
 			sync_root_with_cwd = true,
 			update_focused_file = { enable = true, update_root = true },
-			view = { width = { min = 35 } },
+			view = { width = { min = 35, max = 50 } },
 		})
 	end,
 }

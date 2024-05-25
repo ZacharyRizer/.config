@@ -14,19 +14,22 @@ return {
 	event = { "BufReadPre", "BufNewFile", "VeryLazy" },
 	config = function()
 		----> LSP-UI SETTINGS
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
-
 		require("lspconfig.ui.windows").default_options = { border = "rounded" }
 		vim.diagnostic.config({
 			float = { border = "rounded" },
 			severity_sort = true,
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = " ",
+					[vim.diagnostic.severity.WARN] = " ",
+					[vim.diagnostic.severity.HINT] = "󰠠 ",
+					[vim.diagnostic.severity.INFO] = " ",
+				},
+			},
 			update_in_insert = true,
 			virtual_text = true,
 		})
+
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 		vim.lsp.handlers["textDocument/signatureHelp"] =
 			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
@@ -75,6 +78,7 @@ return {
 				},
 			},
 			jsonls = {},
+			kotlin_language_server = {},
 			lua_ls = {
 				settings = {
 					Lua = {
@@ -86,6 +90,7 @@ return {
 			rust_analyzer = {},
 			taplo = {},
 			tsserver = {},
+			yamlls = {},
 		}
 		local ensure_installed = vim.tbl_keys(servers or {})
 		local capabilities = vim.lsp.protocol.make_client_capabilities()

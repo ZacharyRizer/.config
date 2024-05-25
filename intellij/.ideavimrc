@@ -1,0 +1,74 @@
+set clipboard+=unnamedplus
+set hidden
+set highlightedyank
+set hlsearch
+set ignorecase
+set incsearch
+set nerdtree
+set noerrorbells
+set noshowmode
+set nowrap
+set number relativenumber
+set scrolloff=10
+set sidescrolloff=10
+set shiftwidth=2
+set smartcase
+set softtabstop=2
+set splitbelow
+set splitright
+set surround
+set tabstop=2
+set termguicolors
+set timeoutlen=250
+set undofile
+set updatetime=100
+set wildignorecase
+set wildmode=longest:full,full
+
+let g:mapleader = " "
+inoremap <C-c> <Esc>
+nnoremap <C-c> :nohl<CR>
+
+" unmapping a few keys that annoy me
+nnoremap K <nop>
+nnoremap Q <nop>
+nnoremap <Space> <nop>
+nnoremap <Backspace> <nop>
+
+" easy word replace, search/replace, and */# searching stay in place
+nnoremap c* *Ncgn
+nnoremap *  *N
+nnoremap #  #N
+vnoremap *  y/\V<C-R>=escape(@",'/\')<CR><CR>N
+vnoremap #  y?\V<C-R>=escape(@",'/\')<CR><CR>N
+nnoremap <leader>/ :%s/
+vnoremap <leader>/ :s/
+
+" more intuitive yanking
+nmap Y y$
+
+" tab text easily
+vnoremap < <gv
+vnoremap > >gv
+nnoremap < <<
+nnoremap > >>
+
+" Pane navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+
+nmap [d :action GotoNextError<CR>
+nmap ]d :action GotoPreviousError<CR>
+
+let g:highlightedyank_highlight_duration = "100"
+let g:NERDTreeMapOpenSplit = "<C-s>"
+let g:NERDTreeMapOpenVSplit = "<C-v>"
+
+map <C-e> :NERDTreeToggle<CR>
+map <C-t> <action>(ActivateTerminalToolWindow)
+map <leader>f <action>(GotoFile)
+map <leader>h <action>(RecentFiles)
+map <leader>` <action>(CommentByLineComment)
+map :w <action>(ReformatCode)
