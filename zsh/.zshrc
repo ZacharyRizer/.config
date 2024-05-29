@@ -32,6 +32,7 @@ alias g++="g++ -std=c++17 -Wall"
 alias ipy="ipython"
 alias json="python -m json.tool"
 alias lg="lazygit"
+alias ld="lazydocker"
 alias rm="rm -i"
 
 code() {
