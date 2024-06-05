@@ -26,7 +26,6 @@ return {
 					return "<Ignore>"
 				end, { expr = true })
 
-				V.map("n", "gc", gs.preview_hunk)
 				V.map("n", "gb", function()
 					gs.blame_line({ full = true })
 				end)

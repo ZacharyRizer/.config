@@ -38,6 +38,10 @@ V.map("n", "Y", "y$")
 ---- better line connection
 V.map("n", "J", "mzJ`z")
 
+---- comment toggle
+V.map("n", "<Leader>`", "gcc", { remap = true })
+V.map("v", "<Leader>`", "gc", { remap = true })
+
 ---- move/tab text easily
 V.map("v", "<", "<gv")
 V.map("v", ">", ">gv")
