@@ -2,8 +2,6 @@ return {
 	"kylechui/nvim-surround",
 	event = "VeryLazy",
 	config = function()
-		require("nvim-surround").setup({
-			keymaps = { visual = "<Leader>s" },
-		})
+		require("nvim-surround").setup()
 	end,
 }
