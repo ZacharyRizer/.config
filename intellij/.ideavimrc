@@ -59,8 +59,8 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 
-nmap [d :action GotoNextError<CR>
-nmap ]d :action GotoPreviousError<CR>
+nmap ]d :action GotoNextError<CR>
+nmap [d :action GotoPreviousError<CR>
 
 let g:highlightedyank_highlight_duration = "100"
 let g:NERDTreeMapOpenSplit = "<C-s>"
