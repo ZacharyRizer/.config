@@ -6,12 +6,12 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				css = { "prettierd", "prettier" },
+				go = { "gopls" },
 				haskell = { "fourmolu" },
 				html = { "prettierd", "prettier" },
 				javascript = { "prettierd", "prettier" },
 				javascriptreact = { "prettierd", "prettier" },
 				json = { "prettierd", "prettier" },
-				kotlin = { "ktlint" },
 				lua = { "stylua" },
 				markdown = { "prettierd", "prettier" },
 				python = { "autopep8" },

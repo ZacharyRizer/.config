@@ -69,6 +69,7 @@ return {
 		----> SERVER CONFIGURATIONS
 		local servers = {
 			cssls = {},
+			gopls = {},
 			html = {},
 			hls = {
 				settings = {
@@ -78,7 +79,6 @@ return {
 				},
 			},
 			jsonls = {},
-			kotlin_language_server = {},
 			lua_ls = {
 				settings = {
 					Lua = {
