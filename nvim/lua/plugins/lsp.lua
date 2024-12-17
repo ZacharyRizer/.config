@@ -70,6 +70,7 @@ return {
 		local servers = {
 			cssls = {},
 			gopls = {},
+			graphql = {},
 			html = {},
 			hls = {
 				settings = {
@@ -89,6 +90,7 @@ return {
 			pyright = {},
 			rust_analyzer = {},
 			taplo = {},
+			terraformls = {},
 			tsserver = {},
 			yamlls = {},
 		}
