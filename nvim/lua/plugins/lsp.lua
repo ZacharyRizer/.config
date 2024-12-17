@@ -91,7 +91,7 @@ return {
 			rust_analyzer = {},
 			taplo = {},
 			terraformls = {},
-			tsserver = {},
+			ts_ls = {},
 			yamlls = {},
 		}
 		local ensure_installed = vim.tbl_keys(servers or {})

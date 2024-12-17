@@ -6,8 +6,8 @@ return {
 		V.map("n", "<C-e>", ":NvimTreeToggle<CR>")
 
 		local function custom_open_dir()
-			local lib = require("nvim-tree.lib")
-			local node = lib.get_node_at_cursor()
+			local api = require("nvim-tree.api")
+			local node = api.tree.get_node_under_cursor()
 
 			if node.type == "directory" and not node.open then
 				require("nvim-tree.api").node.open.edit()
