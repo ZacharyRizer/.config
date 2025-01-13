@@ -3,6 +3,7 @@
 	name = ZacharyRizer
 	email = zacharyrizer@gmail.com
 	token = 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
+	signingkey = 7D0EC369D6C14AEB
 
 [alias]
 	co = checkout
@@ -26,3 +27,5 @@
 	required = true
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true
