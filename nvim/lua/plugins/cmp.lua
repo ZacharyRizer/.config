@@ -8,12 +8,15 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		{ "windwp/nvim-autopairs", opts = { fast_wrap = {} } },
+		{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
 	},
 	event = "VeryLazy",
 	config = function()
 		local cmp = require("cmp")
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		local ls = require("luasnip")
+
+		require("nvim-ts-autotag").setup()
 
 		local has_words_before = function()
 			unpack = unpack or table.unpack
@@ -66,6 +69,19 @@ return {
 				{ name = "path", group_index = 1 },
 				{ name = "buffer", group_index = 2 },
 			},
+			sorting = {
+				comparators = {
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
+					cmp.config.compare.score,
+					cmp.config.compare.recently_used,
+					cmp.config.compare.locality,
+					cmp.config.compare.kind,
+					cmp.config.compare.sort_text,
+					cmp.config.compare.length,
+					cmp.config.compare.order,
+				},
+			},
 			window = {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
@@ -74,25 +90,17 @@ return {
 		})
 
 		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline({
-				["<C-p>"] = function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					else
-						fallback()
-					end
-				end,
-				["<C-n>"] = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					else
-						fallback()
-					end
-				end,
-			}),
+			mapping = cmp.mapping.preset.cmdline(),
 			sources = {
 				{ name = "cmdline", keyword_length = 2 },
 				{ name = "path" },
+			},
+		})
+
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
 			},
 		})
 

@@ -30,7 +30,7 @@ return {
 						["<C-j>"] = actions.move_selection_next,
 						["<C-k>"] = actions.move_selection_previous,
 						["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-						["<C-r>"] = actions.delete_buffer,
+						["<C-x>"] = actions.delete_buffer,
 						["<C-s>"] = actions.select_horizontal,
 						["<C-t>"] = actions.toggle_selection,
 						["<M-BS>"] = { "<c-s-w>", type = "command" },
@@ -53,6 +53,7 @@ return {
 		require("telescope").load_extension("yank_history")
 
 		V.map("n", "<Leader>c", ":Telescope commands<CR>")
+		V.map("n", "<Leader>C", ":Telescope command_history<CR>")
 		V.map("n", "<Leader>f", ":Telescope find_files<CR>")
 		V.map("n", "<Leader>F", function()
 			require("telescope.builtin").find_files({
@@ -60,9 +61,10 @@ return {
 			})
 		end)
 		V.map("n", "<Leader>g", ":Telescope live_grep<CR>")
-		V.map("n", "<Leader>b", ":Telescope buffers<CR>")
-		V.map("n", "<Leader>h", ":Telescope oldfiles prompt_title=History<CR>")
+		V.map("n", "<Leader>h", ":Telescope buffers<CR>")
+		V.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
 		V.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
+		V.map("n", "<Leader>M", ":Telescope keymaps<CR>")
 		V.map("n", "<Leader>y", ":Telescope yank_history<CR>")
 	end,
 }

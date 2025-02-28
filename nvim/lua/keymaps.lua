@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 V.map("i", "<C-c>", "<ESC>")
 V.map("n", "<C-c>", ":nohl<CR>")
 
@@ -29,8 +30,6 @@ V.map("n", "*", "*N")
 V.map("n", "#", "#N")
 V.map("v", "*", 'y/<C-R>"<CR>N')
 V.map("v", "#", 'y?<C-R>"<CR>N')
-V.map("n", "<Leader>/", ":%s/")
-V.map("v", "<Leader>/", ":s/")
 
 ---- more intuitive yanking
 V.map("n", "Y", "y$")
@@ -39,8 +38,8 @@ V.map("n", "Y", "y$")
 V.map("n", "J", "mzJ`z")
 
 ---- comment toggle
-V.map("n", "<Leader>`", "gcc", { remap = true })
-V.map("v", "<Leader>`", "gc", { remap = true })
+V.map("n", "<Leader>/", "gcc", { remap = true })
+V.map("v", "<Leader>/", "gc", { remap = true })
 
 ---- move/tab text easily
 V.map("v", "<", "<gv")

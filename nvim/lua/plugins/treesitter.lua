@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	dependencies = { "folke/ts-comments.nvim" },
 	event = "VeryLazy",
 	config = function()
 		require("nvim-treesitter.configs").setup({
@@ -42,5 +43,6 @@ return {
 			},
 			indent = { enable = true },
 		})
+		require("ts-comments").setup({})
 	end,
 }
