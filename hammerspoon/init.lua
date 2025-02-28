@@ -60,8 +60,8 @@ spoon.SpoonInstall:andUse("AppLauncher", {
 		q = "Finder",
 		w = "iTerm",
 		e = "Brave Browser",
-		a = "Microsoft Teams",
-		s = "IntelliJ IDEA Community Edition",
+		a = "zoom.us",
+		s = "Bruno",
 		d = "Slack",
 	},
 })
