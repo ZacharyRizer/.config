@@ -9,11 +9,13 @@ return {
 				return vim.fn.executable("make") == 1
 			end,
 		},
+		"nvim-telescope/telescope-live-grep-args.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	event = "VeryLazy",
 	config = function()
 		local actions = require("telescope.actions")
+		local lga_actions = require("telescope-live-grep-args.actions")
 		require("telescope").setup({
 			defaults = {
 				entry_prefix = "  ",
@@ -27,13 +29,17 @@ return {
 				},
 				mappings = {
 					i = {
+						["<C-f>"] = false,
 						["<C-j>"] = actions.move_selection_next,
 						["<C-k>"] = actions.move_selection_previous,
 						["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-						["<C-x>"] = actions.delete_buffer,
 						["<C-s>"] = actions.select_horizontal,
 						["<C-t>"] = actions.toggle_selection,
+						["<C-x>"] = actions.delete_buffer,
+						["<c-r>"] = actions.to_fuzzy_refine,
 						["<M-BS>"] = { "<c-s-w>", type = "command" },
+						["<C-N>"] = require("telescope.actions").cycle_history_next,
+						["<C-P>"] = require("telescope.actions").cycle_history_prev,
 					},
 					n = {
 						["<C-t>"] = actions.toggle_selection,
@@ -46,9 +52,18 @@ return {
 			},
 			extensions = {
 				["ui-select"] = { require("telescope.themes").get_dropdown({}) },
+				live_grep_args = {
+					auto_quoting = true,
+					mappings = {
+						i = {
+							["<C-g>"] = lga_actions.quote_prompt(),
+						},
+					},
+				},
 			},
 		})
 		require("telescope").load_extension("fzf")
+		require("telescope").load_extension("live_grep_args")
 		require("telescope").load_extension("ui-select")
 		require("telescope").load_extension("yank_history")
 
@@ -60,7 +75,9 @@ return {
 				cwd = vim.fn.input("Find Files: ", vim.fn.getcwd(), "dir"),
 			})
 		end)
-		V.map("n", "<Leader>g", ":Telescope live_grep<CR>")
+		V.map("n", "<leader>g", function()
+			require("telescope").extensions.live_grep_args.live_grep_args()
+		end)
 		V.map("n", "<Leader>h", ":Telescope buffers<CR>")
 		V.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
 		V.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
