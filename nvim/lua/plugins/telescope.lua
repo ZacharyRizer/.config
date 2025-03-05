@@ -38,8 +38,8 @@ return {
 						["<C-x>"] = actions.delete_buffer,
 						["<c-r>"] = actions.to_fuzzy_refine,
 						["<M-BS>"] = { "<c-s-w>", type = "command" },
-						["<C-N>"] = require("telescope.actions").cycle_history_next,
-						["<C-P>"] = require("telescope.actions").cycle_history_prev,
+						["<Down>"] = require("telescope.actions").cycle_history_next,
+						["<Up>"] = require("telescope.actions").cycle_history_prev,
 					},
 					n = {
 						["<C-t>"] = actions.toggle_selection,

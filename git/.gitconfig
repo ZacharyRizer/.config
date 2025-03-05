@@ -14,6 +14,8 @@
   pager = delta
 [credential]
 	helper = /usr/local/share/gcm-core/git-credential-manager-core
+[interactive]
+    diffFilter = delta --color-only
 [delta]
   diff-so-fancy = true
   navigate = true
@@ -27,5 +29,3 @@
 	required = true
 [init]
 	defaultBranch = main
-; [commit]
-; 	gpgsign = true
