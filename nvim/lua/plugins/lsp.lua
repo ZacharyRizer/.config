@@ -50,7 +50,6 @@ return {
 				V.map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
 				V.map("n", "[d", vim.diagnostic.goto_prev, opts)
 				V.map("n", "]d", vim.diagnostic.goto_next, opts)
-				V.map("n", "<Leader>d", vim.diagnostic.open_float, opts)
 				V.map("n", "K", vim.lsp.buf.hover, opts)
 
 				local virtual_text_enabled = true

@@ -8,27 +8,24 @@ return {
 
 				V.map("n", "]c", function()
 					if vim.wo.diff then
-						return "]c"
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gs.nav_hunk("next")
 					end
-					vim.schedule(function()
-						gs.next_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true })
+				end)
 
 				V.map("n", "[c", function()
 					if vim.wo.diff then
-						return "[c"
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gs.nav_hunk("prev")
 					end
-					vim.schedule(function()
-						gs.prev_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true })
-
-				V.map("n", "gb", function()
-					gs.blame_line({ full = true })
 				end)
+
+				V.map("n", "gb", gs.blame_line)
+				V.map("n", "<Leader>b", gs.blame)
+				V.map("n", "gc", gs.preview_hunk)
+				V.map("n", "<Leader>d", gs.diffthis)
 			end,
 		})
 	end,
