@@ -1,6 +1,6 @@
 return {
 	"mbbill/undotree",
-	event = "VeryLazy",
+	keys = { "<Leader>u" },
 	config = function()
 		V.map("n", "<Leader>u", ":UndotreeToggle<CR>")
 		vim.g.undotree_DiffAutoOpen = false

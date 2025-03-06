@@ -12,11 +12,24 @@ return {
 		"nvim-telescope/telescope-live-grep-args.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
-	event = "VeryLazy",
+	cmd = "Telescope",
+	keys = {
+		"<Leader>c",
+		"<Leader>C",
+		"<Leader>f",
+		"<Leader>F",
+		"<Leader>g",
+		"<Leader>h",
+		"<Leader>H",
+		"<Leader>m",
+		"<Leader>M",
+		"<Leader>y",
+	},
 	config = function()
+		local telescope = require("telescope")
 		local actions = require("telescope.actions")
 		local lga_actions = require("telescope-live-grep-args.actions")
-		require("telescope").setup({
+		telescope.setup({
 			defaults = {
 				entry_prefix = "  ",
 				layout_config = {
@@ -62,10 +75,11 @@ return {
 				},
 			},
 		})
-		require("telescope").load_extension("fzf")
-		require("telescope").load_extension("live_grep_args")
-		require("telescope").load_extension("ui-select")
-		require("telescope").load_extension("yank_history")
+
+		local extensions = { "fzf", "live_grep_args", "ui-select", "yank_history" }
+		for _, ext in ipairs(extensions) do
+			telescope.load_extension(ext)
+		end
 
 		V.map("n", "<Leader>c", ":Telescope commands<CR>")
 		V.map("n", "<Leader>C", ":Telescope command_history<CR>")

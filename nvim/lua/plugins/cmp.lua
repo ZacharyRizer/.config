@@ -7,14 +7,16 @@ return {
 		"hrsh7th/cmp-path",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
-		{ "windwp/nvim-autopairs", opts = { fast_wrap = {} } },
-		{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
+		{ "windwp/nvim-autopairs", event = "InsertEnter", opts = { fast_wrap = {} } },
+		{ "windwp/nvim-ts-autotag", event = "InsertEnter", dependencies = "nvim-treesitter/nvim-treesitter" },
 	},
-	event = "VeryLazy",
+	event = { "InsertEnter", "CmdlineEnter" },
 	config = function()
 		local cmp = require("cmp")
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		local ls = require("luasnip")
+
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 		require("nvim-ts-autotag").setup()
 
@@ -58,16 +60,21 @@ return {
 				end, { "i", "s" }),
 			}),
 			preselect = cmp.PreselectMode.None,
+			performance = {
+				max_view_entries = 15,
+				debounce = 60,
+				throttle = 30,
+			},
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
+					ls.lsp_expand(args.body)
 				end,
 			},
 			sources = {
 				{ name = "nvim_lsp", group_index = 1 },
 				{ name = "luasnip", group_index = 1 },
 				{ name = "path", group_index = 1 },
-				{ name = "buffer", group_index = 2 },
+				{ name = "buffer", keyword_length = 3, group_index = 2 },
 			},
 			sorting = {
 				comparators = {
@@ -103,7 +110,5 @@ return {
 				{ name = "buffer" },
 			},
 		})
-
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }

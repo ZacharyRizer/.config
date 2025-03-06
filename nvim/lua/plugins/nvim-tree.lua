@@ -1,7 +1,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = "VeryLazy",
+	keys = { "<C-e>" },
 	config = function()
 		V.map("n", "<C-e>", ":NvimTreeToggle<CR>")
 

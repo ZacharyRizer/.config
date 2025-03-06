@@ -1,6 +1,6 @@
 return {
 	"gbprod/yanky.nvim",
-	event = "VeryLazy",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("yanky").setup({ highlight = { timer = 100 } })
 		V.map({ "n", "x" }, "y", "<Plug>(YankyYank)")

@@ -1,7 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local big_screen = function()
 			return vim.fn.winwidth(0) > 90

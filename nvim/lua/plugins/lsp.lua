@@ -11,10 +11,9 @@ return {
 			},
 		},
 	},
-	event = { "BufReadPre", "BufNewFile", "VeryLazy" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		----> LSP-UI SETTINGS
-		require("lspconfig.ui.windows").default_options = { border = "rounded" }
 		vim.diagnostic.config({
 			float = { border = "rounded" },
 			severity_sort = true,
@@ -29,10 +28,6 @@ return {
 			update_in_insert = true,
 			virtual_text = true,
 		})
-
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-		vim.lsp.handlers["textDocument/signatureHelp"] =
-			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 		----> LSP KEYMAPS
 		V.autocmd("LspAttach", {
@@ -50,7 +45,12 @@ return {
 				V.map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
 				V.map("n", "[d", vim.diagnostic.goto_prev, opts)
 				V.map("n", "]d", vim.diagnostic.goto_next, opts)
-				V.map("n", "K", vim.lsp.buf.hover, opts)
+				V.map("n", "K", function()
+					vim.lsp.buf.hover({ border = "rounded" })
+				end, opts)
+				V.map("i", "<C-k>", function()
+					vim.lsp.buf.signature_help({ border = "rounded" })
+				end, opts)
 
 				local virtual_text_enabled = true
 				V.map("n", "<Leader>td", function()
@@ -93,14 +93,17 @@ return {
 			ts_ls = {},
 			yamlls = {},
 		}
-		local ensure_installed = vim.tbl_keys(servers or {})
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			vim.lsp.protocol.make_client_capabilities(),
+			require("cmp_nvim_lsp").default_capabilities()
+		)
 
 		require("mason").setup({ ui = { border = "rounded" } })
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
-			ensure_installed = ensure_installed,
+			ensure_installed = vim.tbl_keys(servers),
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
