@@ -11,7 +11,7 @@ return {
 			},
 		},
 	},
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	config = function()
 		----> LSP-UI SETTINGS
 		vim.diagnostic.config({

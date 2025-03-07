@@ -1,6 +1,6 @@
 return {
 	"aserowy/tmux.nvim",
-	event = "VimEnter",
+	event = "VeryLazy",
 	config = function()
 		require("tmux").setup({
 			copy_sync = {

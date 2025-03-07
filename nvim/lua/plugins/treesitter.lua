@@ -2,7 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	dependencies = { "folke/ts-comments.nvim" },
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {

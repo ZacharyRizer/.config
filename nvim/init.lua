@@ -3,6 +3,7 @@
 V = {}
 V.augroup = vim.api.nvim_create_augroup
 V.autocmd = vim.api.nvim_create_autocmd
+V.command = vim.api.nvim_create_user_command
 V.del = vim.keymap.del
 V.map = vim.keymap.set
 

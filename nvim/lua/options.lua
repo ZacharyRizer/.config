@@ -56,6 +56,18 @@ V.autocmd("BufWritePre", {
 	command = "%s/\\s\\+$//e",
 	group = proton_pack,
 })
+-- highlight on yank
+V.autocmd("TextYankPost", {
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = "IncSearch",
+			timeout = 100,
+			on_visual = true,
+		})
+	end,
+	group = proton_pack,
+})
 -- use 4 space tabs for specific languages
 V.autocmd("FileType", {
 	pattern = { "go", "haskell", "lua", "python", "yaml" },

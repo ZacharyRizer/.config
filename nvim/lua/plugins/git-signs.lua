@@ -1,10 +1,10 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 	config = function()
 		require("gitsigns").setup({
 			on_attach = function()
-				local gs = package.loaded.gitsigns
+				local gs = require("gitsigns")
 
 				V.map("n", "]c", function()
 					if vim.wo.diff then
@@ -23,9 +23,13 @@ return {
 				end)
 
 				V.map("n", "gb", gs.blame_line)
-				V.map("n", "<Leader>b", gs.blame)
 				V.map("n", "gc", gs.preview_hunk)
-				V.map("n", "<Leader>d", gs.diffthis)
+				V.command("Blame", function()
+					gs.blame()
+				end, {})
+				V.command("Diff", function()
+					gs.diffthis()
+				end, {})
 			end,
 		})
 	end,

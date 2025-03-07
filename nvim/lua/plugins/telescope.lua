@@ -12,19 +12,7 @@ return {
 		"nvim-telescope/telescope-live-grep-args.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
-	cmd = "Telescope",
-	keys = {
-		"<Leader>c",
-		"<Leader>C",
-		"<Leader>f",
-		"<Leader>F",
-		"<Leader>g",
-		"<Leader>h",
-		"<Leader>H",
-		"<Leader>m",
-		"<Leader>M",
-		"<Leader>y",
-	},
+	event = "VeryLazy",
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
@@ -76,7 +64,7 @@ return {
 			},
 		})
 
-		local extensions = { "fzf", "live_grep_args", "ui-select", "yank_history" }
+		local extensions = { "fzf", "live_grep_args", "ui-select" }
 		for _, ext in ipairs(extensions) do
 			telescope.load_extension(ext)
 		end
@@ -96,6 +84,6 @@ return {
 		V.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
 		V.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
 		V.map("n", "<Leader>M", ":Telescope keymaps<CR>")
-		V.map("n", "<Leader>y", ":Telescope yank_history<CR>")
+		V.map("n", "<Leader>r", ":Telescope registers<CR>")
 	end,
 }

@@ -1,5 +1,6 @@
 return {
-	"glepnir/dashboard-nvim",
+	"nvimdev/dashboard-nvim",
+	lazy = false,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		require("dashboard").setup({

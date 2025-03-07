@@ -7,10 +7,10 @@ return {
 		"hrsh7th/cmp-path",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
-		{ "windwp/nvim-autopairs", event = "InsertEnter", opts = { fast_wrap = {} } },
-		{ "windwp/nvim-ts-autotag", event = "InsertEnter", dependencies = "nvim-treesitter/nvim-treesitter" },
+		{ "windwp/nvim-autopairs", opts = { fast_wrap = {} } },
+		{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
 	},
-	event = { "InsertEnter", "CmdlineEnter" },
+	event = "VeryLazy",
 	config = function()
 		local cmp = require("cmp")
 		local ls = require("luasnip")

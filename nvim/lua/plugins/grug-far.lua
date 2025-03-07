@@ -1,6 +1,6 @@
 return {
 	"MagicDuck/grug-far.nvim",
-	keys = { "<Leader>G" },
+	event = "VeryLazy",
 	config = function()
 		require("grug-far").setup({
 			engines = {
