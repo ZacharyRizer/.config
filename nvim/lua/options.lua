@@ -3,6 +3,7 @@ vim.loader.enable()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- neovim options
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -37,25 +38,30 @@ vim.opt.wildmode = "longest:full,full"
 vim.opt.wrap = false
 vim.opt.writebackup = false
 
+-- auto commands
 local proton_pack = V.augroup("Proton_Pack", { clear = true })
+
 -- turn off automatic comment formatting
 V.autocmd("BufEnter", {
 	pattern = "*",
 	command = "setlocal fo-=c fo-=r fo-=o",
 	group = proton_pack,
 })
+
 -- check for file changes
 V.autocmd({ "BufEnter", "FocusGained" }, {
 	pattern = "*",
 	command = "checktime",
 	group = proton_pack,
 })
+
 -- remove trailing white space on save
 V.autocmd("BufWritePre", {
 	pattern = "*",
 	command = "%s/\\s\\+$//e",
 	group = proton_pack,
 })
+
 -- highlight on yank
 V.autocmd("TextYankPost", {
 	pattern = "*",
@@ -68,18 +74,41 @@ V.autocmd("TextYankPost", {
 	end,
 	group = proton_pack,
 })
+
 -- use 4 space tabs for specific languages
 V.autocmd("FileType", {
 	pattern = { "go", "haskell", "lua", "python", "yaml" },
 	command = "setlocal shiftwidth=4 softtabstop=4 tabstop=4",
 	group = proton_pack,
 })
+
 -- make windows equal sizes when opening/closing
 V.autocmd("VimResized", {
 	pattern = "*",
 	command = ":wincmd =",
 	group = proton_pack,
 })
+
+-- automatically save and load folds
+V.autocmd("BufWinLeave", {
+	pattern = "*",
+	callback = function()
+		if vim.fn.expand("%") ~= "" then
+			vim.cmd("mkview")
+		end
+	end,
+	group = proton_pack,
+})
+V.autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function()
+		if vim.fn.expand("%") ~= "" then
+			vim.cmd("silent! loadview")
+		end
+	end,
+	group = proton_pack,
+})
+
 -- cursorline is only active in current buffer
 local set_cursorline = function(event, value, pattern)
 	V.autocmd(event, {
