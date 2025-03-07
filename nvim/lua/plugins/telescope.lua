@@ -72,11 +72,7 @@ return {
 		V.map("n", "<Leader>c", ":Telescope commands<CR>")
 		V.map("n", "<Leader>C", ":Telescope command_history<CR>")
 		V.map("n", "<Leader>f", ":Telescope find_files<CR>")
-		V.map("n", "<Leader>F", function()
-			require("telescope.builtin").find_files({
-				cwd = vim.fn.input("Find Files: ", vim.fn.getcwd(), "dir"),
-			})
-		end)
+		V.map("n", "<Leader>F", ":Telescope find_files hidden=true<CR>")
 		V.map("n", "<leader>g", function()
 			require("telescope").extensions.live_grep_args.live_grep_args()
 		end)
@@ -84,6 +80,6 @@ return {
 		V.map("n", "<Leader>H", ":Telescope oldfiles prompt_title=History<CR>")
 		V.map("n", "<Leader>m", ":Telescope help_tags prompt_title=Manual<CR>")
 		V.map("n", "<Leader>M", ":Telescope keymaps<CR>")
-		V.map("n", "<Leader>r", ":Telescope registers<CR>")
+		V.map("n", "<Leader>R", ":Telescope registers<CR>")
 	end,
 }
