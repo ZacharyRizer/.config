@@ -1,0 +1,13 @@
+adjust-cell-height = 10%
+confirm-close-surface = false
+cursor-style = block
+cursor-style-blink = false
+font-family = FiraCode Nerd Font Mono
+macos-titlebar-style = hidden
+resize-overlay = never
+shell-integration = zsh
+shell-integration-features = no-cursor
+theme = tokyonight_moon
+window-padding-x = 4
+window-padding-y = 4
+window-save-state = always
