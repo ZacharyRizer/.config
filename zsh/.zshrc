@@ -26,11 +26,9 @@ export CLICOLOR=1
 export EDITOR="nvim"
 export LESS="iMRS"
 export VISUAL="$EDITOR"
+export GPG_TTY=$(tty)
 
 # Aliases
-alias g++="g++ -std=c++17 -Wall"
-alias ipy="ipython"
-alias json="python -m json.tool"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias rm="rm -i"
@@ -39,8 +37,9 @@ code() {
    open -a VsCode $1
 }
 
+
 # Put Homebrew's sbin in path
-eval $(/opt/homebrew/bin/brew shellenv)
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # ------------------------ ==> FZF settings <== ------------------------------#
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -60,6 +59,7 @@ export FZF_CTRL_T_OPTS="
 
 export FZF_DEFAULT_COMMAND="fd --hidden -E '.git' -E '.venv' -E 'node_modules'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 
 # ------------------------- ==> python setup <== ----------------------------#
 export PYENV_ROOT="$HOME/.pyenv"
@@ -99,14 +99,12 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 
+# ------------------------ ==> JAVA settings <== -----------------------------#
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+
 # ------------------------ ==> ghc settings <== ------------------------------#
 [ -f "/Users/zrizer/.ghcup/env" ] && source "/Users/zrizer/.ghcup/env" # ghcup-env
-
-
-# ------------------------- ==> GO settings <== ------------------------------#
-# export PATH=$PATH:$(go env GOPATH):$(go env GOPATH)/bin:$(go env GOROOT)/bin
-# export GOPATH=$(go env GOPATH)
-# export GOROOT=$(go env GOROOT)
 
 # Set Starship as a prompt
 eval "$(starship init zsh)"
@@ -114,7 +112,3 @@ eval "$(starship init zsh)"
 # ZSH Packages
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home
-export PATH=$JAVA_HOME/bin:$PATH
-
-export GPG_TTY=$(tty)

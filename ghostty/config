@@ -1,0 +1,11 @@
+confirm-close-surface = false
+cursor-style = block
+cursor-style-blink = false
+font-family = FiraCode Nerd Font Mono
+macos-titlebar-style = hidden
+resize-overlay = never
+shell-integration = zsh
+shell-integration-features = no-cursor
+theme = tokyonight_moon
+window-save-state = always
+
