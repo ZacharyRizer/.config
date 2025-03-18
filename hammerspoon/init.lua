@@ -3,32 +3,17 @@ hs.loadSpoon("SpoonInstall")
 local super = { "ctrl", "cmd" }
 
 hs.hotkey.bind(super, "`", hs.reload)
-hs.alert.show("Hammerspoon Config Loaded")
 
 BackspaceRemap = hs.eventtap
-	.new({ hs.eventtap.event.types.keyDown }, function(event)
-		if event:getFlags():containExactly({ "ctrl" }) and event:getKeyCode() == hs.keycodes.map["delete"] then
-			return true, hs.eventtap.keyStroke("alt", "delete", 0)
-		end
-	end)
-	:start()
-BackspaceRemap2 = hs.eventtap
 	.new({ hs.eventtap.event.types.keyDown }, function(event)
 		if event:getFlags():containExactly({ "shift" }) and event:getKeyCode() == hs.keycodes.map["delete"] then
 			return true, hs.eventtap.keyStroke("alt", "delete", 0)
 		end
 	end)
 	:start()
-ReturnRemap = hs.eventtap
-	.new({ hs.eventtap.event.types.keyDown }, function(event)
-		if event:getFlags():containExactly({ "ctrl" }) and event:getKeyCode() == hs.keycodes.map["space"] then
-			return true, hs.eventtap.keyStroke({}, "return", 0)
-		end
-	end)
-	:start()
 
 ---- KeyMap to use C-n and C-p for up and down
-local nonItermHotkeys = {
+local nonTerminalHotkeys = {
 	hs.hotkey.new("ctrl", "n", function()
 		hs.eventtap.keyStroke({}, "down", 0)
 	end),
@@ -38,20 +23,20 @@ local nonItermHotkeys = {
 }
 
 local enableHotkeys = function()
-	for _, hotkey in ipairs(nonItermHotkeys) do
+	for _, hotkey in ipairs(nonTerminalHotkeys) do
 		hotkey:enable()
 	end
 end
 
 local disableHotkeys = function()
-	for _, hotkey in ipairs(nonItermHotkeys) do
+	for _, hotkey in ipairs(nonTerminalHotkeys) do
 		hotkey:disable()
 	end
 end
 
-local iTermWindowFilter = hs.window.filter.new({ "iTerm2" })
-iTermWindowFilter:subscribe(hs.window.filter.windowFocused, disableHotkeys)
-iTermWindowFilter:subscribe(hs.window.filter.windowUnfocused, enableHotkeys)
+TerminalWindowFilter = hs.window.filter.new({ "Ghostty" })
+TerminalWindowFilter:subscribe(hs.window.filter.windowFocused, disableHotkeys)
+TerminalWindowFilter:subscribe(hs.window.filter.windowUnfocused, enableHotkeys)
 
 ---- Launching Specific Apps
 spoon.SpoonInstall:andUse("AppLauncher", {
@@ -94,18 +79,18 @@ spoon.SpoonInstall:andUse("WindowScreenLeftAndRight", {
 -- HANDLE SCROLLING WITH MOUSE BUTTON PRESSED
 local deferred = false
 
-overrideOtherMouseDown = hs.eventtap.new({ hs.eventtap.event.types.rightMouseDown }, function(e)
+OverrideOtherMouseDown = hs.eventtap.new({ hs.eventtap.event.types.rightMouseDown }, function()
 	deferred = true
 	return true
 end)
 
-overrideOtherMouseUp = hs.eventtap.new({ hs.eventtap.event.types.rightMouseUp }, function(e)
+OverrideOtherMouseUp = hs.eventtap.new({ hs.eventtap.event.types.rightMouseUp }, function(e)
 	if deferred then
-		overrideOtherMouseDown:stop()
-		overrideOtherMouseUp:stop()
+		OverrideOtherMouseDown:stop()
+		OverrideOtherMouseUp:stop()
 		hs.eventtap.rightClick(e:location(), pressedMouseButton)
-		overrideOtherMouseDown:start()
-		overrideOtherMouseUp:start()
+		OverrideOtherMouseDown:start()
+		OverrideOtherMouseUp:start()
 		return true
 	end
 	return false
@@ -114,7 +99,7 @@ end)
 local oldmousepos = {}
 local scrollmult = -2.5 -- negative multiplier makes mouse work like traditional scrollwheel, for macOS, use positive number.
 
-dragOtherToScroll = hs.eventtap.new({ hs.eventtap.event.types.rightMouseDragged }, function(e)
+DragOtherToScroll = hs.eventtap.new({ hs.eventtap.event.types.rightMouseDragged }, function(e)
 	deferred = false
 	oldmousepos = hs.mouse.absolutePosition()
 	local dx = e:getProperty(hs.eventtap.event.properties["mouseEventDeltaX"])
@@ -125,6 +110,6 @@ dragOtherToScroll = hs.eventtap.new({ hs.eventtap.event.types.rightMouseDragged 
 	return true, { scroll }
 end)
 
-overrideOtherMouseDown:start()
-overrideOtherMouseUp:start()
-dragOtherToScroll:start()
+OverrideOtherMouseDown:start()
+OverrideOtherMouseUp:start()
+DragOtherToScroll:start()

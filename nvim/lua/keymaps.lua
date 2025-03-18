@@ -31,9 +31,6 @@ V.map("n", "#", "#N")
 V.map("v", "*", 'y/<C-R>"<CR>N')
 V.map("v", "#", 'y?<C-R>"<CR>N')
 
----- more intuitive yanking
-V.map("n", "Y", "y$")
-
 ---- better line connection
 V.map("n", "J", "mzJ`z")
 
