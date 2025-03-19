@@ -11,6 +11,7 @@ V.map = vim.keymap.set
 
 require("options")
 require("keymaps")
+require("scratch-pad")
 
 ---------------------------------- Plug-Ins ------------------------------------
 
