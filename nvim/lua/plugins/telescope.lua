@@ -13,6 +13,7 @@ return {
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	event = "VeryLazy",
+	keys = { "<Leader>c", "<Leader>f", "<Leader>g", "<Leader>h", "<Leader>m" },
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")

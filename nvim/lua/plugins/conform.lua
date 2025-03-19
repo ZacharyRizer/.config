@@ -22,13 +22,12 @@ return {
 				typescriptreact = { "prettierd", "prettier" },
 				yaml = { "prettierd", "prettier" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
+			format_after_save = {
+				lsp_format = "fallback",
 			},
 		})
 
-		V.map({ "n", "v" }, "<Leader><CR>", function()
+		V.command("Format", function()
 			conform.format({
 				lsp_fallback = true,
 				async = true,
