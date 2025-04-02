@@ -46,6 +46,17 @@ V.map("n", ">", ">>")
 V.map("v", "J", ":m '>+1<CR>gv=gv")
 V.map("v", "K", ":m '<-2<CR>gv=gv")
 
+---- toggle relative line numbers
+function ToggleRelativeLineNumbers()
+	if vim.wo.relativenumber then
+		vim.wo.relativenumber = false
+	else
+		vim.wo.relativenumber = true
+	end
+end
+
+V.map("n", "<Leader>ln", ":lua ToggleRelativeLineNumbers()<CR>", { noremap = true, silent = true })
+
 ---- quickfix lists
 vim.cmd([[
   function! QuickFixToggle()

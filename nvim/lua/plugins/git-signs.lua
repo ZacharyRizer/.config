@@ -27,9 +27,13 @@ return {
 				V.command("Blame", function()
 					gs.blame()
 				end, {})
-				V.command("Diff", function()
-					gs.diffthis()
-				end, {})
+				V.command("Diff", function(opts)
+					if opts.args and opts.args ~= "" then
+						gs.diffthis(opts.args)
+					else
+						gs.diffthis()
+					end
+				end, { nargs = "?" })
 			end,
 		})
 	end,

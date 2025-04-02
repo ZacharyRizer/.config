@@ -52,4 +52,4 @@ local function toggle_scratch_buffer()
 end
 
 -- Set up the keybinding to toggle scratch buffer
-vim.keymap.set("n", "<Leader>~", toggle_scratch_buffer, { desc = "Toggle scratch buffer" })
+vim.keymap.set("n", "<Leader>p", toggle_scratch_buffer, { desc = "Toggle scratch buffer" })
