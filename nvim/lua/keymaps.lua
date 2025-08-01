@@ -34,6 +34,10 @@ V.map("v", "#", 'y?<C-R>"<CR>N')
 ---- better line connection
 V.map("n", "J", "mzJ`z")
 
+---- true delete
+V.map({ "n", "v" }, "<Leader>d", '"_d')
+V.map({ "n", "v" }, "<Leader>D", '"_D')
+
 ---- comment toggle
 V.map("n", "<Leader>/", "gcc", { remap = true })
 V.map("v", "<Leader>/", "gc", { remap = true })

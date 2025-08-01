@@ -37,9 +37,9 @@ vim.opt.undofile = true
 vim.opt.wildignorecase = true
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wrap = false
+vim.opt.winborder = "rounded"
 vim.opt.writebackup = false
 
--- auto commands
 local proton_pack = V.augroup("Proton_Pack", { clear = true })
 
 -- turn off automatic comment formatting

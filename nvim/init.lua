@@ -9,9 +9,9 @@ V.map = vim.keymap.set
 
 --------------------------------- Core Setup -----------------------------------
 
-require("options")
 require("keymaps")
 require("scratch-pad")
+require("settings")
 
 ---------------------------------- Plug-Ins ------------------------------------
 
