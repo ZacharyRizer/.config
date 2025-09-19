@@ -6,29 +6,40 @@ return {
 	},
 	event = "VeryLazy",
 	config = function()
-		local lspconfig = require("lspconfig")
-		local servers = {
-			cssls = {},
-			gopls = {},
-			html = {},
-			jsonls = {},
-			lua_ls = {
-				settings = {
-					Lua = {
-						diagnostics = { globals = { "hs", "vim" } },
-					},
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		vim.lsp.config("*", {
+			capabilities = capabilities,
+		})
+
+		vim.lsp.config.cssls = {}
+		vim.lsp.config.gopls = {}
+		vim.lsp.config.html = {}
+		vim.lsp.config.jsonls = {}
+		vim.lsp.config.lua_ls = {
+			settings = {
+				Lua = {
+					diagnostics = { globals = { "hs", "vim" } },
 				},
 			},
-			pyright = {},
-			rust_analyzer = {},
-			ts_ls = {},
-			yamlls = {},
+		}
+		vim.lsp.config.pyright = {}
+		vim.lsp.config.rust_analyzer = {}
+		vim.lsp.config.ts_ls = {}
+		vim.lsp.config.yamlls = {}
+
+		local servers = {
+			"cssls",
+			"gopls",
+			"html",
+			"jsonls",
+			"lua_ls",
+			"pyright",
+			"rust_analyzer",
+			"ts_ls",
+			"yamlls",
 		}
 
-		for server, config in pairs(servers) do
-			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-			lspconfig[server].setup(config)
-		end
+		vim.lsp.enable(servers)
 
 		----> LSP-UI SETTINGS
 		vim.diagnostic.config({
