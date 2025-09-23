@@ -51,27 +51,26 @@ V.map("v", "J", ":m '>+1<CR>gv=gv")
 V.map("v", "K", ":m '<-2<CR>gv=gv")
 
 ---- toggle relative line numbers
-function ToggleRelativeLineNumbers()
-	if vim.wo.relativenumber then
-		vim.wo.relativenumber = false
+V.map("n", "<Leader>ln", function()
+	vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "Toggle relative line numbers" })
+
+---- quickfix lists
+local function quickfix_toggle()
+	local qf_exists = false
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win["quickfix"] == 1 then
+			qf_exists = true
+			break
+		end
+	end
+	if qf_exists then
+		vim.cmd("cclose")
 	else
-		vim.wo.relativenumber = true
+		vim.cmd("copen")
 	end
 end
 
-V.map("n", "<Leader>ln", ":lua ToggleRelativeLineNumbers()<CR>", { noremap = true, silent = true })
-
----- quickfix lists
-vim.cmd([[
-  function! QuickFixToggle()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-      copen
-    else
-      cclose
-    endif
-  endfunction
-]])
-
 V.map("n", "]q", ":cnext<CR>")
 V.map("n", "[q", ":cprev<CR>")
-V.map("n", "<C-q>", ":call QuickFixToggle()<CR>")
+V.map("n", "<C-q>", quickfix_toggle)

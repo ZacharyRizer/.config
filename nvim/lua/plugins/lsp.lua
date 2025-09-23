@@ -6,28 +6,19 @@ return {
 	},
 	event = "VeryLazy",
 	config = function()
-		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		vim.lsp.config("*", {
-			capabilities = capabilities,
+			capabilities = require("blink.cmp").get_lsp_capabilities(),
 		})
 
-		vim.lsp.config.cssls = {}
-		vim.lsp.config.gopls = {}
-		vim.lsp.config.html = {}
-		vim.lsp.config.jsonls = {}
 		vim.lsp.config.lua_ls = {
 			settings = {
 				Lua = {
-					diagnostics = { globals = { "hs", "vim" } },
+					diagnostics = { globals = { "hs", "spoon", "vim" } },
 				},
 			},
 		}
-		vim.lsp.config.pyright = {}
-		vim.lsp.config.rust_analyzer = {}
-		vim.lsp.config.ts_ls = {}
-		vim.lsp.config.yamlls = {}
 
-		local servers = {
+		vim.lsp.enable({
 			"cssls",
 			"gopls",
 			"html",
@@ -37,9 +28,7 @@ return {
 			"rust_analyzer",
 			"ts_ls",
 			"yamlls",
-		}
-
-		vim.lsp.enable(servers)
+		})
 
 		----> LSP-UI SETTINGS
 		vim.diagnostic.config({
