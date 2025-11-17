@@ -2,8 +2,6 @@
 [user]
 	name = ZacharyRizer
 	email = zacharyrizer@gmail.com
-	token = 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
-	signingkey = 7D0EC369D6C14AEB
 
 [alias]
 	co = checkout
@@ -13,7 +11,7 @@
 	editor = nvim
   pager = delta
 [credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager-core
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [interactive]
     diffFilter = delta --color-only
 [delta]
