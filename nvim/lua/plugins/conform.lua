@@ -22,9 +22,12 @@ return {
 				typescriptreact = { "prettierd", "prettier" },
 				yaml = { "prettierd", "prettier" },
 			},
-			format_after_save = {
-				lsp_format = "fallback",
-			},
+			format_on_save = function(bufnr)
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				return { timeout_ms = 500, lsp_format = "fallback" }
+			end,
 		})
 
 		V.command("Format", function()
@@ -33,5 +36,23 @@ return {
 				async = true,
 			})
 		end, { desc = "Format file or range (in visual mode)" })
+
+		V.command("FormatDisable", function(args)
+			if args.bang then
+				vim.b.disable_autoformat = true
+			else
+				vim.g.disable_autoformat = true
+			end
+		end, {
+			desc = "Disable autoformat-on-save",
+			bang = true,
+		})
+
+		V.command("FormatEnable", function()
+			vim.b.disable_autoformat = false
+			vim.g.disable_autoformat = false
+		end, {
+			desc = "Re-enable autoformat-on-save",
+		})
 	end,
 }
