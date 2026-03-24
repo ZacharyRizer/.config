@@ -32,6 +32,7 @@ export GPG_TTY=$(tty)
 alias lg="lazygit"
 alias ld="lazydocker"
 alias rm="rm -i"
+alias hg='history -1000 | grep'
 
 code() {
    open -a VsCode $1
@@ -62,12 +63,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 
 # ------------------------- ==> python setup <== ----------------------------#
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-export PIPENV_VENV_IN_PROJECT=1
-export PATH="$PYENV_ROOT/shims:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+#
+# export PIPENV_VENV_IN_PROJECT=1
+# export PATH="$PYENV_ROOT/shims:$PATH"
 
 # ------------------------ ==> nvm settings <== ------------------------------#
 export NVM_DIR="$HOME/.nvm"

@@ -1,29 +1,7 @@
-# This is Git's per-user configuration file.
-[user]
-	name = ZacharyRizer
-	email = zacharyrizer@gmail.com
+[url "ssh://git@github.com/"]
+     insteadOf  = https://github.com/
 
-[alias]
-	co = checkout
-	br = branch
-	s = status
-[core]
-	editor = nvim
-  pager = delta
-[credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-  diff-so-fancy = true
-  navigate = true
-  side-by-side = true
-[fetch]
-    prune = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[init]
-	defaultBranch = main
+[url "ssh://git@gitlab.login.gov/"]
+     insteadOf  = https://gitlab.login.gov/
+[user]
+	email = zachary.rizer@gsa.gov
