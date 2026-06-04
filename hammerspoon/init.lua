@@ -45,8 +45,8 @@ spoon.SpoonInstall:andUse("AppLauncher", {
 		q = "Finder",
 		w = "Ghostty",
 		e = "Brave Browser",
-		a = "zoom.us",
-		s = "Bruno",
+		a = "Claude",
+		-- s = "",
 		d = "Slack",
 	},
 })

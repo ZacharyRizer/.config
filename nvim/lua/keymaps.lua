@@ -1,7 +1,6 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 V.map("i", "<C-c>", "<ESC>")
 V.map("n", "<C-c>", ":nohl<CR>")
+V.map("n", "<Leader>`", ":e $MYVIMRC<CR>", { desc = "Open init.lua" })
 
 ---- terminal buffer mappings
 V.map("t", "<Leader><ESC>", "<C-\\><C-n>")

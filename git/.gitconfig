@@ -1,7 +1,6 @@
-[url "ssh://git@github.com/"]
-     insteadOf  = https://github.com/
-
-[url "ssh://git@gitlab.login.gov/"]
-     insteadOf  = https://gitlab.login.gov/
 [user]
-	email = zachary.rizer@gsa.gov
+    email = zacharyrizer@gmail.com
+    name = Zachary Rizer
+
+[credential]
+    helper = manager

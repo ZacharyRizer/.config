@@ -1,3 +1,5 @@
+require("vim._core.ui2").enable({})
+
 vim.loader.enable()
 
 vim.g.loaded_netrw = 1

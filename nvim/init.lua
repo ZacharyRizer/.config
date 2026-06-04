@@ -9,6 +9,10 @@ V.map = vim.keymap.set
 
 --------------------------------- Core Setup -----------------------------------
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("builtins")
 require("keymaps")
 require("scratch-pad")
 require("settings")
@@ -16,7 +20,7 @@ require("settings")
 ---------------------------------- Plug-Ins ------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",

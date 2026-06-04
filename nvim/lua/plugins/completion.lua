@@ -1,9 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	dependencies = {
-		"windwp/nvim-autopairs",
-		"windwp/nvim-ts-autotag",
-	},
+	dependencies = { "windwp/nvim-autopairs" },
 	version = "1.*",
 	opts = {
 		appearance = {
@@ -21,6 +18,5 @@ return {
 	config = function(_, opts)
 		require("blink.cmp").setup(opts)
 		require("nvim-autopairs").setup()
-		require("nvim-ts-autotag").setup()
 	end,
 }

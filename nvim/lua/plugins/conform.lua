@@ -5,22 +5,19 @@ return {
 		local conform = require("conform")
 		conform.setup({
 			formatters_by_ft = {
-				css = { "prettierd", "prettier" },
-				go = { "gopls" },
-				haskell = { "fourmolu" },
-				html = { "prettierd", "prettier" },
-				javascript = { "prettierd", "prettier" },
-				javascriptreact = { "prettierd", "prettier" },
-				json = { "prettierd", "prettier" },
+				css = { "prettierd", "prettier", stop_after_first = true },
+				html = { "prettierd", "prettier", stop_after_first = true },
+				javascript = { "prettierd", "prettier", stop_after_first = true },
+				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+				json = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
-				markdown = { "prettierd", "prettier" },
+				markdown = { "prettierd", "prettier", stop_after_first = true },
 				python = { "autopep8" },
 				rust = { "rustfmt" },
-				scss = { "prettierd", "prettier" },
-				toml = { "taplo" },
-				typescript = { "prettierd", "prettier" },
-				typescriptreact = { "prettierd", "prettier" },
-				yaml = { "prettierd", "prettier" },
+				scss = { "prettierd", "prettier", stop_after_first = true },
+				typescript = { "prettierd", "prettier", stop_after_first = true },
+				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+				yaml = { "prettierd", "prettier", stop_after_first = true },
 			},
 			format_on_save = function(bufnr)
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
