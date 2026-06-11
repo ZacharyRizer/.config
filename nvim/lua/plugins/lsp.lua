@@ -32,6 +32,7 @@ return {
 
 		----> LSP-UI SETTINGS
 		vim.diagnostic.config({
+			float = { border = "rounded" },
 			severity_sort = true,
 			signs = {
 				text = {
@@ -41,7 +42,7 @@ return {
 					[vim.diagnostic.severity.INFO] = " ",
 				},
 			},
-			update_in_insert = true,
+			update_in_insert = false,
 			virtual_text = true,
 		})
 
@@ -58,9 +59,12 @@ return {
 				V.map("n", "<Leader>ld", ":Telescope diagnostics bufnr=0<CR>", opts)
 				V.map("n", "<Leader>ls", ":Telescope lsp_document_symbols<CR>", opts)
 				V.map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
-				V.map("n", "[d", vim.diagnostic.goto_prev, opts)
-				V.map("n", "]d", vim.diagnostic.goto_next, opts)
-				V.map("n", "K", vim.lsp.buf.hover, opts)
+				V.map("n", "[d", function()
+					vim.diagnostic.jump({ count = -1, float = true })
+				end, opts)
+				V.map("n", "]d", function()
+					vim.diagnostic.jump({ count = 1, float = true })
+				end, opts)
 
 				local virtual_text_enabled = true
 				V.map("n", "<Leader>td", function()
@@ -70,7 +74,7 @@ return {
 					})
 				end, opts)
 				V.map("n", "<Leader>th", function()
-					vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 				end, opts)
 			end,
 		})

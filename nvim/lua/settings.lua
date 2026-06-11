@@ -8,7 +8,7 @@ vim.g.loaded_netrwPlugin = 1
 -- neovim options
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy" }
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
@@ -59,7 +59,11 @@ V.autocmd({ "BufEnter", "FocusGained" }, {
 -- remove trailing white space on save
 V.autocmd("BufWritePre", {
 	pattern = "*",
-	command = "%s/\\s\\+$//e",
+	callback = function()
+		local view = vim.fn.winsaveview()
+		vim.cmd([[silent! keeppatterns %s/\s\+$//e]])
+		vim.fn.winrestview(view)
+	end,
 	group = proton_pack,
 })
 
@@ -67,7 +71,7 @@ V.autocmd("BufWritePre", {
 V.autocmd("TextYankPost", {
 	pattern = "*",
 	callback = function()
-		vim.highlight.on_yank({
+		vim.hl.on_yank({
 			higroup = "IncSearch",
 			timeout = 100,
 			on_visual = true,
@@ -91,11 +95,15 @@ V.autocmd("VimResized", {
 })
 
 -- automatically save and load folds
+local function is_real_file()
+	return vim.bo.buftype == "" and vim.bo.buflisted and vim.fn.expand("%") ~= ""
+end
+
 V.autocmd("BufWinLeave", {
 	pattern = "*",
 	callback = function()
-		if vim.fn.expand("%") ~= "" then
-			vim.cmd("mkview")
+		if is_real_file() then
+			vim.cmd("silent! mkview")
 		end
 	end,
 	group = proton_pack,
@@ -103,7 +111,7 @@ V.autocmd("BufWinLeave", {
 V.autocmd("BufWinEnter", {
 	pattern = "*",
 	callback = function()
-		if vim.fn.expand("%") ~= "" then
+		if is_real_file() then
 			vim.cmd("silent! loadview")
 		end
 	end,

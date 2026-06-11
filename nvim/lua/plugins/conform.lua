@@ -29,7 +29,7 @@ return {
 
 		V.command("Format", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = true,
 			})
 		end, { desc = "Format file or range (in visual mode)" })

@@ -13,7 +13,6 @@ return {
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	event = "VeryLazy",
-	keys = { "<Leader>c", "<Leader>f", "<Leader>g", "<Leader>h", "<Leader>m" },
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
@@ -40,8 +39,8 @@ return {
 						["<C-x>"] = actions.delete_buffer,
 						["<c-r>"] = actions.to_fuzzy_refine,
 						["<M-BS>"] = { "<c-s-w>", type = "command" },
-						["<Down>"] = require("telescope.actions").cycle_history_next,
-						["<Up>"] = require("telescope.actions").cycle_history_prev,
+						["<Down>"] = actions.cycle_history_next,
+						["<Up>"] = actions.cycle_history_prev,
 					},
 					n = {
 						["<C-t>"] = actions.toggle_selection,

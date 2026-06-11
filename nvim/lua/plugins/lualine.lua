@@ -13,11 +13,6 @@ return {
 				component_separators = "",
 				section_separators = "",
 				disabled_filetypes = { statusline = { "dashboard" }, winbar = { "dashboard" } },
-				refresh = {
-					statusline = 100,
-					tabline = 100,
-					winbar = 100,
-				},
 			},
 			sections = {
 				lualine_a = { {
